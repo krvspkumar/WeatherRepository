@@ -9,6 +9,7 @@ import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import okhttp3.OkHttpClient;
 
@@ -62,9 +63,9 @@ public class DynamoDBConfig {
 	public OkHttpClient okHttpClient() {
 		return new OkHttpClient();
 	}
-	
-//	@Bean
-//	public ObjectMapper objectMapper() {
-//		return new ObjectMapper();
-//	}
+
+	@Bean
+	public ObjectMapper objectMapper() {
+		return new ObjectMapper();
+	}
 }
