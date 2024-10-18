@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -24,6 +26,16 @@ public class WeatherController {
 	public ResponseEntity<?> getCurrentWeather(@PathVariable String cityName) {
 		try {
 			WeatherResponse weatherResponse = weatherService.getWeatherForCity(cityName);
+			return new ResponseEntity<>(weatherResponse, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>("Data saving Failed", HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@PostMapping("/currentWeather")
+	public ResponseEntity<?> getCurrentWeather(@RequestBody WeatherResponse wrResponse) {
+		try {
+			WeatherResponse weatherResponse = weatherService.getWeatherForCity(wrResponse.getCityName());
 			return new ResponseEntity<>(weatherResponse, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>("Data saving Failed", HttpStatus.NOT_FOUND);
