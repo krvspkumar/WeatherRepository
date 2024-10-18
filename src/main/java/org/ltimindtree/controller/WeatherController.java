@@ -32,10 +32,10 @@ public class WeatherController {
 		}
 	}
 
-	@PostMapping("/currentWeather")
-	public ResponseEntity<?> getCurrentWeather(@RequestBody WeatherResponse wrResponse) {
+	@PostMapping("/currentWeather/save")
+	public ResponseEntity<?> getWeather(@RequestBody String city) {
 		try {
-			WeatherResponse weatherResponse = weatherService.getWeatherForCity(wrResponse.getCityName());
+			WeatherResponse weatherResponse = weatherService.getWeatherForCity(city);
 			return new ResponseEntity<>(weatherResponse, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>("Data saving Failed", HttpStatus.NOT_FOUND);
