@@ -53,6 +53,6 @@ jobs:
     - name: Deploy to AWS CloudFormation
       uses: aws-actions/aws-cloudformation-github-deploy@v1
       with:
-        name: case-study-stack
+        name: krvspk-stack
         template: https://krvspk-bucket.s3.amazonaws.com/FinalTemplate.yaml
         no-fail-on-empty-changeset: "1"
