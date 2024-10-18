@@ -69,7 +69,8 @@ public class WeatherService implements WeatherRepository {
 
 	private boolean isCacheExpired(WeatherResponse response) {
 		long currentTime = Instant.now().getEpochSecond();
-		return (currentTime - response.getTimestamp()) > 1800; // 30 minutes
+		
+		return (currentTime) > 1800; // 30 minutes
 	}
 
 	private WeatherResponse callWeatherApi(String cityName) {
