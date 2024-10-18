@@ -1,0 +1,56 @@
+Globals:
+  Function:
+    Timeout: 20
+
+Parameters:
+  RapidApiKey:
+    Type: String
+    Description: RapidAPI Key for Weather API
+  RapidApiHost:
+    Type: String
+    Description: RapidAPI Host for Weather API
+
+Resources:
+  WeatherFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: org.ltimindtree.StreamLambdaHandler::handleRequest
+      Runtime: java21
+      CodeUri: target/spring-boot-lambda-1.0-SNAPSHOT-lambda-package.zip
+      MemorySize: 512
+      Environment:
+        Variables:
+          RAPIDAPI_KEY: !Ref RapidApiKey
+          RAPIDAPI_HOST: !Ref RapidApiHost
+          DYNAMODB_TABLE_NAME: !Ref WeatherTable
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - DynamoDBCrudPolicy:
+            TableName: !Ref WeatherTable
+      Events:
+        GetWeather:
+          Type: Api
+          Properties:
+            Path: /currentWeather/{cityName}
+            Method: get
+
+  WeatherTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: cityName
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+
+Outputs:
+  WeatherApi:
+    Description: "API Gateway endpoint URL for Weather function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/currentWeather/{cityName}"
+  WeatherFunction:
+    Description: "Weather Lambda Function ARN"
+    Value: !GetAtt WeatherFunction.Arn
+  WeatherTable:
+    Description: "DynamoDB Table for Weather Data"
+    Value: !Ref WeatherTable
