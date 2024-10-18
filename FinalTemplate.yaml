@@ -38,6 +38,10 @@ Resources:
         S3Bucket: krvspk-bucket
         S3Key: spring-boot-lambda-1.0-SNAPSHOT-lambda-package.zip
       Role: !GetAtt LambdaExecutionRole.Arn
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref WeatherData
+          MY_AWS_REGION: 'us-east-1'
       FileSystemConfigs: []
       FunctionName: "SpringFunction"
       Runtime: "java21"
