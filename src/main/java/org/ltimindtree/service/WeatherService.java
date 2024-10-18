@@ -59,7 +59,7 @@ public class WeatherService implements WeatherRepository {
 		// If not in cache or expired, call the API
 		WeatherResponse weatherResponse = callWeatherApi(cityName);
 		weatherResponse.setCityName(cityName);
-		weatherResponse.setTimestamp(Instant.now().getEpochSecond());
+		//weatherResponse.setTimestamp(Instant.now().getEpochSecond());
 
 		// Cache the result in DynamoDB
 		weatherTable.putItem(weatherResponse);
