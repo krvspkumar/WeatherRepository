@@ -17,16 +17,16 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 @Configuration
 public class AppConfig {
 
-	@Value("${aws.dynamodb.accesskey}")
+	@Value("${aws-access-key-id}")
 	private String awsAccessKey;
 
-	@Value("${aws.dynamodb.secretkey}")
+	@Value("${aws-secret-access-key}")
 	private String awsSecretKey;
 
-	@Value("${aws.dynamodb.endpoint}")
+	@Value("${aws-endpoint}")
 	private String awsDynamoDBEndPoint;
 
-	@Value("${aws.dynamodb.region}")
+	@Value("${aws-region}")
 	private String awsRegion;
 
 	@Bean
