@@ -40,8 +40,8 @@ Resources:
       Role: !GetAtt LambdaExecutionRole.Arn
       Environment:
         Variables:
-          TABLE_NAME: !Ref WeatherData
-          MY_AWS_REGION: 'us-east-1'
+          TABLE_NAME: !Ref DynamoDBTableWeatherData
+          KRVSPK_AWS_REGION: 'us-east-1'
       FileSystemConfigs: []
       FunctionName: "SpringFunction"
       Runtime: "java21"
