@@ -32,15 +32,15 @@ public class WeatherController {
 		}
 	}
 
-	@PostMapping("/currentWeather/save")
-	public ResponseEntity<?> getWeather(@RequestBody String city) {
-		try {
-			WeatherResponse weatherResponse = weatherService.getWeatherForCity(city);
-			return new ResponseEntity<>(weatherResponse, HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>("Data saving Failed", HttpStatus.NOT_FOUND);
-		}
-	}
+//	@PostMapping("/currentWeather/save")
+//	public ResponseEntity<?> getWeather(@RequestBody String city) {
+//		try {
+//			WeatherResponse weatherResponse = weatherService.getWeatherForCity(city);
+//			return new ResponseEntity<>(weatherResponse, HttpStatus.OK);
+//		} catch (Exception e) {
+//			return new ResponseEntity<>("Data saving Failed", HttpStatus.NOT_FOUND);
+//		}
+//	}
 
 	@GetMapping("/currentWeather/all")
 	public ResponseEntity<?> allWeatherData() {
